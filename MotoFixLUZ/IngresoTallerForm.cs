@@ -86,7 +86,7 @@ namespace MotoFixLUZ
                 ingresotallereditar.NombreCliente = txtNombreCliente.Text?.Trim() ?? "";
                 ingresotallereditar.CorreoCliente = txtCorreoCliente.Text?.Trim() ?? "";
                 ingresotallereditar.CelularCliente = txtCelularCliente.Text?.Trim() ?? "";
-                ingresotallereditar.DesProblemaDetallaCliente = ""; ///txtDescripcionProblemaMoto.Text?.Trim() ?? "";
+                ingresotallereditar.DesProblemaDetallaCliente = "";
                 ingresotallereditar.DesTrabajoDetallaCliente = txtDescripcionTrabajoDetallaCliente.Text?.Trim() ?? "";
                 ingresotallereditar.DesTrabajoDetallaMecanico = txtDescripcionDelMecanico.Text?.Trim() ?? "";
                 ingresotallereditar.CatEstadoId = int.Parse(cmbEstadoIngresoTaller.SelectedValue?.ToString() ?? "0");
