@@ -12,6 +12,7 @@ namespace Datos.Modelos
         public string TrabajoRealizado { get; set; } = string.Empty;
         public string Observacion { get; set; } = string.Empty;
         public bool Estado {  get; set; }
+        public decimal ? PrecioEstimado { get; set; }
 
     }
 }

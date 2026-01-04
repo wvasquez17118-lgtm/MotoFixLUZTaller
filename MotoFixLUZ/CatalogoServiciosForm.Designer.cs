@@ -35,6 +35,8 @@
             label1 = new Label();
             lsvServicio = new ListView();
             panel2 = new Panel();
+            label3 = new Label();
+            txtPrecioEstimado = new TextBox();
             txtObervacion = new TextBox();
             label4 = new Label();
             panel4 = new Panel();
@@ -113,6 +115,8 @@
             // 
             // panel2
             // 
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(txtPrecioEstimado);
             panel2.Controls.Add(txtObervacion);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(panel4);
@@ -126,10 +130,30 @@
             panel2.Size = new Size(343, 555);
             panel2.TabIndex = 3;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(12, 151);
+            label3.Name = "label3";
+            label3.Size = new Size(121, 20);
+            label3.TabIndex = 16;
+            label3.Text = "Precio estimado";
+            // 
+            // txtPrecioEstimado
+            // 
+            txtPrecioEstimado.Enabled = false;
+            txtPrecioEstimado.Location = new Point(12, 174);
+            txtPrecioEstimado.Multiline = true;
+            txtPrecioEstimado.Name = "txtPrecioEstimado";
+            txtPrecioEstimado.Size = new Size(322, 51);
+            txtPrecioEstimado.TabIndex = 15;
+            txtPrecioEstimado.KeyPress += txtPrecioEstimado_KeyPress;
+            // 
             // txtObervacion
             // 
             txtObervacion.Enabled = false;
-            txtObervacion.Location = new Point(12, 199);
+            txtObervacion.Location = new Point(12, 268);
             txtObervacion.Multiline = true;
             txtObervacion.Name = "txtObervacion";
             txtObervacion.Size = new Size(322, 51);
@@ -139,7 +163,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(12, 176);
+            label4.Location = new Point(12, 245);
             label4.Name = "label4";
             label4.Size = new Size(96, 20);
             label4.TabIndex = 13;
@@ -315,5 +339,7 @@
         private TextBox txtBusqueda;
         private TextBox txtObervacion;
         private Label label4;
+        private Label label3;
+        private TextBox txtPrecioEstimado;
     }
 }

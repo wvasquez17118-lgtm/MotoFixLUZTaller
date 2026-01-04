@@ -27,6 +27,7 @@ namespace MotoFixLUZ
             lsvServicio.Columns.Add("Id", 0);
             lsvServicio.Columns.Add("Servicios", 400);
             lsvServicio.Columns.Add("Observacion", 400);
+            lsvServicio.Columns.Add("Precio estimado", 200);
             CargarGRID();
         }
 
@@ -67,6 +68,8 @@ namespace MotoFixLUZ
             txtServicio.Enabled = true;
             txtServicio.Clear();
             txtObervacion.Clear();
+            txtPrecioEstimado.Clear();
+            txtPrecioEstimado.Enabled = true;
             idservicio = 0;
 
             btnCancelar.Enabled = true;
@@ -89,7 +92,8 @@ namespace MotoFixLUZ
                 {
                     TrabajoRealizado = txtServicio.Text?.Trim() ?? "",
                     Observacion = txtObervacion.Text?.Trim() ?? "",
-                    Estado = true
+                    Estado = true,
+                    PrecioEstimado = Convert.ToDecimal(txtPrecioEstimado.Text.Trim() ?? "0")
                 });
             }
             else
@@ -100,6 +104,7 @@ namespace MotoFixLUZ
                 servicio.Estado = true;
                 servicio.TrabajoRealizado = txtServicio.Text?.Trim() ?? "";
                 servicio.Observacion = txtObervacion.Text?.Trim() ?? "";
+                servicio.PrecioEstimado = Convert.ToDecimal(txtPrecioEstimado.Text.Trim() ?? "0");
             }
             app.SaveChanges();
 
@@ -109,6 +114,8 @@ namespace MotoFixLUZ
             txtObervacion.Clear();
             txtBusqueda.Clear();
             idservicio = 0;
+            txtPrecioEstimado.Clear();
+            txtPrecioEstimado.Enabled = false;
 
             btnCancelar.Enabled = false;
             btnEditar.Enabled = false;
@@ -130,6 +137,7 @@ namespace MotoFixLUZ
                              Trabajo = ca.TrabajoRealizado,
                              Observacion = ca.Observacion,
                              Id = ca.CatTrabajoRealizadoId,
+                             PrecioEstimado = ca.PrecioEstimado,
                          });
             if (!string.IsNullOrEmpty(servicio))
             {
@@ -142,6 +150,7 @@ namespace MotoFixLUZ
                 ListViewItem items = new ListViewItem(item.Id.ToString());
                 items.SubItems.Add(item.Trabajo);
                 items.SubItems.Add(item.Observacion);
+                items.SubItems.Add(item.PrecioEstimado.ToString().Replace(".00",""));
                 lsvServicio.Items.Add(items);
             }
             lblTotal.Text = "TOTAL: " + data.Count();
@@ -165,6 +174,8 @@ namespace MotoFixLUZ
             idservicio = 0;
             txtObervacion.Enabled = false;
             txtServicio.Enabled = false;
+            txtPrecioEstimado.Clear();
+            txtPrecioEstimado.Enabled = false;
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -172,6 +183,7 @@ namespace MotoFixLUZ
             txtServicio.Enabled = true;
             txtObervacion.Enabled = true;
             btnCancelar.Enabled = true;
+            txtPrecioEstimado.Enabled = true;
             btnEditar.Enabled = false;
             btnEliminar.Enabled = false;
             btnGuardar.Enabled = true;
@@ -212,12 +224,31 @@ namespace MotoFixLUZ
 
             txtServicio.Text = item.SubItems[1].Text;
             txtObervacion.Text = item.SubItems[2].Text;
+            txtPrecioEstimado.Text = item.SubItems[3].Text;
 
             btnEditar.Enabled = true;
             btnCancelar.Enabled = true;
             btnEliminar.Enabled = true;
             btnNuevo.Enabled = false;
             btnGuardar.Enabled = false;
+        }
+
+        private void txtPrecioEstimado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite control (Backspace, etc.)
+            if (char.IsControl(e.KeyChar))
+                return;
+
+            // Permite dígitos 0-9
+            if (char.IsDigit(e.KeyChar))
+                return;
+
+            // (Opcional) Permitir signo negativo solo al inicio y solo una vez
+            if (e.KeyChar == '-' && ((TextBox)sender).SelectionStart == 0 && !((TextBox)sender).Text.Contains("-"))
+                return;
+
+            // Bloquea todo lo demás
+            e.Handled = true;
         }
     }
 }
