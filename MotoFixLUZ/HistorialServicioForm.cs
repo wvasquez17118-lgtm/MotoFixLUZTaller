@@ -16,15 +16,6 @@ namespace MotoFixLUZ
 
         private void HistorialServicioForm_Load(object sender, EventArgs e)
         {
-            cmbMarca.DataSource = dbContext.Marcas.ToList();
-            cmbMarca.DisplayMember = "Marca";
-            cmbMarca.ValueMember = "CatMarcaId";
-            cmbMarca.SelectedIndex = -1;
-
-            cmbModelo.DataSource = dbContext.Modelos.ToList();
-            cmbModelo.DisplayMember = "Modelo";
-            cmbModelo.ValueMember = "CatModeloId";
-            cmbModelo.SelectedIndex = -1;
 
             lsvDetalleVisitaAlTaller.Columns.Add("Id", 0);
             lsvDetalleVisitaAlTaller.Columns.Add("Fecha ingreso al taller", 200, HorizontalAlignment.Left);
@@ -86,8 +77,8 @@ namespace MotoFixLUZ
             TxtPlaca.Text = string.Empty;
             txtColor.Text = string.Empty;
             txtCilindrada.Text = string.Empty;
-            cmbMarca.SelectedValue = -1;
-            cmbModelo.SelectedValue = -1;
+            txtModelo.Text = string.Empty;
+            txtMarca.Text = string.Empty;
             idmoto = 0;
             lsvDetalleVisitaAlTaller.Items.Clear();
             if (moto is null)
@@ -99,9 +90,9 @@ namespace MotoFixLUZ
             TxtPlaca.Text = moto.Placa;
             txtColor.Text = moto.Color;
             txtCilindrada.Text = moto.Cilindrada;
-            cmbMarca.SelectedValue = moto.CatMarcaId;
-            cmbModelo.SelectedValue = moto.CatModeloId;
-
+            txtMarca.Text = moto.Marca;
+            txtModelo.Text = moto.Modelo;
+           
 
             var resultado = (from ingresotaller in dbContext.IngresoTaller.AsNoTracking()
                              join estado in dbContext.Estados.AsNoTracking() on ingresotaller.CatEstadoId equals estado.CatEstadoId

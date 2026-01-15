@@ -33,8 +33,8 @@
             lblTotal = new Label();
             label1 = new Label();
             panel2 = new Panel();
-            cmbModelo = new ComboBox();
-            cmbMarca = new ComboBox();
+            txtModelo = new TextBox();
+            txtMarca = new TextBox();
             panel4 = new Panel();
             btnNuevo = new Button();
             btnEliminar = new Button();
@@ -93,8 +93,8 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(cmbModelo);
-            panel2.Controls.Add(cmbMarca);
+            panel2.Controls.Add(txtModelo);
+            panel2.Controls.Add(txtMarca);
             panel2.Controls.Add(panel4);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(txtPlaca);
@@ -112,23 +112,21 @@
             panel2.Size = new Size(343, 555);
             panel2.TabIndex = 1;
             // 
-            // cmbModelo
+            // txtModelo
             // 
-            cmbModelo.Enabled = false;
-            cmbModelo.FormattingEnabled = true;
-            cmbModelo.Location = new Point(13, 211);
-            cmbModelo.Name = "cmbModelo";
-            cmbModelo.Size = new Size(318, 28);
-            cmbModelo.TabIndex = 14;
+            txtModelo.Enabled = false;
+            txtModelo.Location = new Point(12, 211);
+            txtModelo.Name = "txtModelo";
+            txtModelo.Size = new Size(322, 27);
+            txtModelo.TabIndex = 16;
             // 
-            // cmbMarca
+            // txtMarca
             // 
-            cmbMarca.Enabled = false;
-            cmbMarca.FormattingEnabled = true;
-            cmbMarca.Location = new Point(13, 150);
-            cmbMarca.Name = "cmbMarca";
-            cmbMarca.Size = new Size(318, 28);
-            cmbMarca.TabIndex = 13;
+            txtMarca.Enabled = false;
+            txtMarca.Location = new Point(15, 155);
+            txtMarca.Name = "txtMarca";
+            txtMarca.Size = new Size(322, 27);
+            txtMarca.TabIndex = 15;
             // 
             // panel4
             // 
@@ -230,6 +228,7 @@
             // 
             // txtPlaca
             // 
+            txtPlaca.CharacterCasing = CharacterCasing.Upper;
             txtPlaca.Enabled = false;
             txtPlaca.Location = new Point(12, 91);
             txtPlaca.Name = "txtPlaca";
@@ -304,6 +303,7 @@
             // 
             // txtBusqueda
             // 
+            txtBusqueda.CharacterCasing = CharacterCasing.Upper;
             txtBusqueda.Location = new Point(12, 24);
             txtBusqueda.Multiline = true;
             txtBusqueda.Name = "txtBusqueda";
@@ -384,7 +384,7 @@
         private Button btnGuardar;
         private Button btnEditar;
         private Button btnCancelar;
-        private ComboBox cmbModelo;
-        private ComboBox cmbMarca;
+        private TextBox txtModelo;
+        private TextBox txtMarca;
     }
 }

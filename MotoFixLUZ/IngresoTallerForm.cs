@@ -99,8 +99,8 @@ namespace MotoFixLUZ
             txtPlaca.Text = string.Empty;
             txtColor.Text = string.Empty;
             txtCilindrada.Text = string.Empty;
-            cmbMarca.SelectedValue = -1;
-            cmbModelo.SelectedValue = -1;
+            txtMarca.Clear();
+            txtModelo.Clear();
             txtKilometrajeIngreso.Text = "";
             txtNombreCliente.Text = "";
             txtCorreoCliente.Text = "";
@@ -119,12 +119,12 @@ namespace MotoFixLUZ
 
         private void btnBuscarMoto_Click(object sender, EventArgs e)
         {
-            var moto = dbContext.Motos.FirstOrDefault(p => p.Placa.Trim() == txtMotoPlacaBuscador.Text.Trim().ToUpper());
+            var moto = dbContext.Motos.FirstOrDefault(p => p.Placa.Trim() == txtMotoPlacaBuscador.Text.Trim());
             txtPlaca.Text = string.Empty;
             txtColor.Text = string.Empty;
             txtCilindrada.Text = string.Empty;
-            cmbMarca.SelectedValue = -1;
-            cmbModelo.SelectedValue = -1;
+            txtMarca.Text = string.Empty;
+            txtModelo.Text = string.Empty;
             idmoto = 0;
             if (moto is null)
             {
@@ -135,21 +135,12 @@ namespace MotoFixLUZ
             txtPlaca.Text = moto.Placa;
             txtColor.Text = moto.Color;
             txtCilindrada.Text = moto.Cilindrada;
-            cmbMarca.SelectedValue = moto.CatMarcaId;
-            cmbModelo.SelectedValue = moto.CatModeloId;
+            txtModelo.Text = moto.Marca;
+            txtMarca.Text = moto.Modelo;
         }
 
         private void IngresoTallerForm_Load(object sender, EventArgs e)
         {
-            cmbMarca.DataSource = dbContext.Marcas.ToList();
-            cmbMarca.DisplayMember = "Marca";
-            cmbMarca.ValueMember = "CatMarcaId";
-            cmbMarca.SelectedIndex = -1;
-
-            cmbModelo.DataSource = dbContext.Modelos.ToList();
-            cmbModelo.DisplayMember = "Modelo";
-            cmbModelo.ValueMember = "CatModeloId";
-            cmbModelo.SelectedIndex = -1;
             lblEstado.Visible = false;
             cmbEstadoIngresoTaller.Visible = false;
 

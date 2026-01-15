@@ -35,8 +35,8 @@
             label1 = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             groupBox1 = new GroupBox();
-            cmbModelo = new ComboBox();
-            cmbMarca = new ComboBox();
+            txtModelo = new TextBox();
+            txtMarca = new TextBox();
             label7 = new Label();
             TxtPlaca = new TextBox();
             label6 = new Label();
@@ -109,8 +109,8 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(cmbModelo);
-            groupBox1.Controls.Add(cmbMarca);
+            groupBox1.Controls.Add(txtModelo);
+            groupBox1.Controls.Add(txtMarca);
             groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(TxtPlaca);
             groupBox1.Controls.Add(label6);
@@ -129,23 +129,21 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Buscar detalle moto";
             // 
-            // cmbModelo
+            // txtModelo
             // 
-            cmbModelo.Enabled = false;
-            cmbModelo.FormattingEnabled = true;
-            cmbModelo.Location = new Point(9, 216);
-            cmbModelo.Name = "cmbModelo";
-            cmbModelo.Size = new Size(322, 28);
-            cmbModelo.TabIndex = 27;
+            txtModelo.Enabled = false;
+            txtModelo.Location = new Point(9, 217);
+            txtModelo.Name = "txtModelo";
+            txtModelo.Size = new Size(322, 27);
+            txtModelo.TabIndex = 25;
             // 
-            // cmbMarca
+            // txtMarca
             // 
-            cmbMarca.Enabled = false;
-            cmbMarca.FormattingEnabled = true;
-            cmbMarca.Location = new Point(9, 156);
-            cmbMarca.Name = "cmbMarca";
-            cmbMarca.Size = new Size(322, 28);
-            cmbMarca.TabIndex = 26;
+            txtMarca.Enabled = false;
+            txtMarca.Location = new Point(9, 157);
+            txtMarca.Name = "txtMarca";
+            txtMarca.Size = new Size(322, 27);
+            txtMarca.TabIndex = 24;
             // 
             // label7
             // 
@@ -233,6 +231,7 @@
             // 
             // txtBusquedaPlaca
             // 
+            txtBusquedaPlaca.CharacterCasing = CharacterCasing.Upper;
             txtBusquedaPlaca.Location = new Point(9, 26);
             txtBusquedaPlaca.Multiline = true;
             txtBusquedaPlaca.Name = "txtBusquedaPlaca";
@@ -342,8 +341,8 @@
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem editarToolStripMenuItem;
         private ToolStripMenuItem verDetalleToolStripMenuItem;
-        private ComboBox cmbMarca;
-        private ComboBox cmbModelo;
         private ToolStripMenuItem enviarReporteWHASTAPPToolStripMenuItem;
+        private TextBox txtModelo;
+        private TextBox txtMarca;
     }
 }

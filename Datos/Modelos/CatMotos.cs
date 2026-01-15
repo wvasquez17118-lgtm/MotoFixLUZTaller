@@ -9,8 +9,8 @@ namespace Datos.Modelos
         [Key]
         [Column("CatMotoId")]
         public long CatMotoId { get; set; }
-		public int CatMarcaId { get; set; }
-        public int CatModeloId { get; set; }
+		public string Marca { get; set; } = string.Empty;
+        public string Modelo { get; set; } = string.Empty;
 		public string Placa {  get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
         public string Cilindrada { get; set; } = string.Empty;

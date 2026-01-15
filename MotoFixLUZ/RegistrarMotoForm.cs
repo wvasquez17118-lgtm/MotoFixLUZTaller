@@ -19,24 +19,12 @@ namespace MotoFixLUZ
             lsvMotos.OwnerDraw = true;
 
             lsvMotos.Columns.Add("Id", 0);
-            lsvMotos.Columns.Add("IdModelo", 0);
-            lsvMotos.Columns.Add("IdMarca", 0);
             lsvMotos.Columns.Add("Placa", 200);
             lsvMotos.Columns.Add("Marca", 150);
             lsvMotos.Columns.Add("Modelo", 150);
             lsvMotos.Columns.Add("Color", 150);
             lsvMotos.Columns.Add("Cilindrada", 150);
-
-
-            cmbMarca.DataSource = app.Marcas.ToList();
-            cmbMarca.DisplayMember = "Marca";
-            cmbMarca.ValueMember = "CatMarcaId";
-            cmbMarca.SelectedIndex = -1;
-
-            cmbModelo.DataSource = app.Modelos.ToList();
-            cmbModelo.DisplayMember = "Modelo";
-            cmbModelo.ValueMember = "CatModeloId";
-            cmbModelo.SelectedIndex = -1;
+             
 
             CargarMotosRandom();
         }
@@ -45,18 +33,14 @@ namespace MotoFixLUZ
         {
             lsvMotos.Items.Clear();
 
-            var fr = (from moto in app.Motos.AsNoTracking()
-                      join modelo in app.Modelos.AsNoTracking() on moto.CatModeloId equals modelo.CatModeloId
-                      join marca in app.Marcas.AsNoTracking() on moto.CatMarcaId equals marca.CatMarcaId
-                      where string.IsNullOrEmpty(busqueda) ? moto.Estado == true : moto.Estado == true && moto.Placa.ToLower().Contains(busqueda)
+            var fr = (from moto in app.Motos.AsNoTracking()                      
+                      where string.IsNullOrEmpty(busqueda) ? moto.Estado == true : moto.Estado == true && moto.Placa.ToUpper().Contains(busqueda)
                       select new
                       {
                           Id = moto.CatMotoId,
                           Placa = moto.Placa,
-                          Modelo = modelo.Modelo,
-                          IdModelo = modelo.CatModeloId,
-                          Marca = marca.Marca,
-                          IdMarca = marca.CatMarcaId,
+                          Modelo = moto.Modelo??"",
+                          Marca = moto.Marca ?? "",
                           Color = moto.Color,
                           Cilindrada = moto.Cilindrada,
                       }).ToList();
@@ -64,8 +48,6 @@ namespace MotoFixLUZ
             foreach (var f in fr)
             {
                 ListViewItem items = new ListViewItem(f.Id.ToString());
-                items.SubItems.Add(f.IdModelo.ToString());
-                items.SubItems.Add(f.IdMarca.ToString());
                 items.SubItems.Add(f.Placa);
                 items.SubItems.Add(f.Marca);
                 items.SubItems.Add(f.Modelo);
@@ -82,8 +64,8 @@ namespace MotoFixLUZ
             txtCilindrada.Enabled = true;
             txtColor.Enabled = true;
             txtPlaca.Enabled = true;
-            cmbMarca.Enabled = true;
-            cmbModelo.Enabled = true;
+            txtMarca.Enabled = true;
+            txtModelo.Enabled = true;
             txtBusqueda.Clear();
             idmoto = 0;
 
@@ -101,12 +83,12 @@ namespace MotoFixLUZ
                 MessageBox.Show("Numero de placa, es requerido.", "Moto FIX LUZ");
                 return;
             }
-            else if (cmbMarca.SelectedValue?.ToString() == "")
+            else if ((txtMarca.Text ?? "").Trim().Length == 0)
             {
                 MessageBox.Show("Marca de la moto, es requerido.", "Moto FIX LUZ");
                 return;
             }
-            else if (cmbModelo.SelectedValue?.ToString() == "")
+            else if ((txtModelo.Text ?? "").Trim().Length == 0)
             {
                 MessageBox.Show("Modelo de la moto, es requerido.", "Moto FIX LUZ");
                 return;
@@ -129,8 +111,8 @@ namespace MotoFixLUZ
                 {
                     app.Motos.Add(new Datos.Modelos.CatMotos()
                     {
-                        CatMarcaId = int.Parse(cmbMarca.SelectedValue?.ToString() ?? "0"),
-                        CatModeloId = int.Parse(cmbModelo.SelectedValue?.ToString() ?? "0"),
+                        Marca = txtMarca.Text.Trim(),
+                        Modelo = txtModelo.Text.Trim(),
                         Cilindrada = txtCilindrada.Text?.Trim() ?? "",
                         Color = txtColor.Text?.Trim() ?? "",
                         Placa = txtPlaca.Text?.Trim().ToUpper() ?? "",
@@ -145,8 +127,8 @@ namespace MotoFixLUZ
                     moto.Placa = txtPlaca.Text?.Trim().ToUpper() ?? "";
                     moto.Cilindrada = txtCilindrada.Text?.Trim() ?? "";
                     moto.Color = txtColor.Text?.Trim() ?? "";
-                    moto.CatMarcaId = int.Parse(cmbMarca.SelectedValue?.ToString() ?? "0");
-                    moto.CatModeloId = int.Parse(cmbModelo.SelectedValue?.ToString() ?? "0");
+                    moto.Marca = txtMarca.Text.Trim();
+                    moto.Modelo = txtModelo.Text.Trim();
                 }
                 app.SaveChanges();
                 CargarMotosRandom();
@@ -167,19 +149,20 @@ namespace MotoFixLUZ
             // Columna id producto
             idmoto = Convert.ToInt32(item.Text);
 
-            cmbModelo.SelectedValue = int.Parse(item.SubItems[1].Text);
-            cmbMarca.SelectedValue = int.Parse(item.SubItems[2].Text);
+            txtMarca.Text = item.SubItems[2].Text;
+            txtModelo.Text = item.SubItems[3].Text;
+            
 
-
-            txtPlaca.Text = item.SubItems[3].Text;
-            txtColor.Text = item.SubItems[6].Text;
-            txtCilindrada.Text = item.SubItems[7].Text;
+            txtPlaca.Text = item.SubItems[1].Text;
+            txtColor.Text = item.SubItems[4].Text;
+            txtCilindrada.Text = item.SubItems[5].Text;
 
             btnEditar.Enabled = true;
             btnCancelar.Enabled = true;
             btnEliminar.Enabled = true;
             btnNuevo.Enabled = false;
             btnGuardar.Enabled = false;
+             
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -191,8 +174,8 @@ namespace MotoFixLUZ
             btnGuardar.Enabled = false;
 
             txtBusqueda.Clear();
-            cmbMarca.SelectedValue = -1;
-            cmbModelo.SelectedValue = -1;
+            txtMarca.Clear();
+            txtModelo.Clear();
             txtPlaca.Text = string.Empty;
             txtCilindrada.Text = string.Empty;
             txtColor.Text = string.Empty;
@@ -201,8 +184,8 @@ namespace MotoFixLUZ
             txtCilindrada.Enabled = false;
             txtColor.Enabled = false;
             txtPlaca.Enabled = false;
-            cmbMarca.Enabled = false;
-            cmbModelo.Enabled = false;
+            txtMarca.Enabled = false;
+            txtModelo.Enabled = false;
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -231,8 +214,8 @@ namespace MotoFixLUZ
             txtCilindrada.Enabled = true;
             txtColor.Enabled = true;
             txtPlaca.Enabled = true;
-            cmbMarca.Enabled = true;
-            cmbModelo.Enabled = true;
+            txtModelo.Enabled = true;
+            txtMarca.Enabled = true;
             btnCancelar.Enabled = true;
             btnEditar.Enabled = false;
             btnEliminar.Enabled = false;
@@ -242,7 +225,7 @@ namespace MotoFixLUZ
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CargarMotosRandom(txtBusqueda.Text.ToLower());
+            CargarMotosRandom(txtBusqueda.Text.ToUpper());
         }
 
         private void lsvMotos_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)

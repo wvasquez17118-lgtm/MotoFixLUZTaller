@@ -34,10 +34,10 @@
             label1 = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             groupBox1 = new GroupBox();
+            txtModelo = new TextBox();
+            txtMarca = new TextBox();
             cmbEstadoIngresoTaller = new ComboBox();
             lblEstado = new Label();
-            cmbModelo = new ComboBox();
-            cmbMarca = new ComboBox();
             btnGuardarIngresoTaller = new Button();
             btnBuscarMoto = new Button();
             txtMotoPlacaBuscador = new TextBox();
@@ -132,10 +132,10 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(txtModelo);
+            groupBox1.Controls.Add(txtMarca);
             groupBox1.Controls.Add(cmbEstadoIngresoTaller);
             groupBox1.Controls.Add(lblEstado);
-            groupBox1.Controls.Add(cmbModelo);
-            groupBox1.Controls.Add(cmbMarca);
             groupBox1.Controls.Add(btnGuardarIngresoTaller);
             groupBox1.Controls.Add(btnBuscarMoto);
             groupBox1.Controls.Add(txtMotoPlacaBuscador);
@@ -155,6 +155,24 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Detalles de la moto";
             // 
+            // txtModelo
+            // 
+            txtModelo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtModelo.Enabled = false;
+            txtModelo.Location = new Point(10, 235);
+            txtModelo.Name = "txtModelo";
+            txtModelo.Size = new Size(372, 27);
+            txtModelo.TabIndex = 30;
+            // 
+            // txtMarca
+            // 
+            txtMarca.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtMarca.Enabled = false;
+            txtMarca.Location = new Point(10, 174);
+            txtMarca.Name = "txtMarca";
+            txtMarca.Size = new Size(372, 27);
+            txtMarca.TabIndex = 29;
+            // 
             // cmbEstadoIngresoTaller
             // 
             cmbEstadoIngresoTaller.FormattingEnabled = true;
@@ -172,24 +190,6 @@
             lblEstado.Size = new Size(152, 20);
             lblEstado.TabIndex = 27;
             lblEstado.Text = "Estado ingreso taller";
-            // 
-            // cmbModelo
-            // 
-            cmbModelo.Enabled = false;
-            cmbModelo.FormattingEnabled = true;
-            cmbModelo.Location = new Point(10, 234);
-            cmbModelo.Name = "cmbModelo";
-            cmbModelo.Size = new Size(372, 28);
-            cmbModelo.TabIndex = 26;
-            // 
-            // cmbMarca
-            // 
-            cmbMarca.Enabled = false;
-            cmbMarca.FormattingEnabled = true;
-            cmbMarca.Location = new Point(9, 170);
-            cmbMarca.Name = "cmbMarca";
-            cmbMarca.Size = new Size(372, 28);
-            cmbMarca.TabIndex = 25;
             // 
             // btnGuardarIngresoTaller
             // 
@@ -220,6 +220,7 @@
             // txtMotoPlacaBuscador
             // 
             txtMotoPlacaBuscador.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtMotoPlacaBuscador.CharacterCasing = CharacterCasing.Upper;
             txtMotoPlacaBuscador.Location = new Point(10, 39);
             txtMotoPlacaBuscador.Multiline = true;
             txtMotoPlacaBuscador.Name = "txtMotoPlacaBuscador";
@@ -239,6 +240,7 @@
             // txtPlaca
             // 
             txtPlaca.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtPlaca.CharacterCasing = CharacterCasing.Upper;
             txtPlaca.Enabled = false;
             txtPlaca.Location = new Point(9, 111);
             txtPlaca.Name = "txtPlaca";
@@ -588,12 +590,12 @@
         private GroupBox groupBox4;
         private Label label14;
         private TextBox txtDescripcionDelMecanico;
-        private ComboBox cmbMarca;
-        private ComboBox cmbModelo;
         private ComboBox cmbEstadoIngresoTaller;
         private Label lblEstado;
         private TableLayoutPanel tableLayoutPanel4;
         private GroupBox groupBox6;
         private GroupBox groupBox5;
+        private TextBox txtModelo;
+        private TextBox txtMarca;
     }
 }
